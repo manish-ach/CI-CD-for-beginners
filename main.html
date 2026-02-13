@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Manish Acharya - Systems Programmer & Full Stack Developer"
+        />
+        <title>Manish Acharya | Rust, Django & Systems Dev</title>
+
+        <!-- Styles -->
+        <style>
+            :root {
+                --bg-color: #0d1117;
+                --text-color: #c9d1d9;
+                --accent-color: #ff6b35; /* Rust Orange */
+                --django-green: #44b78b; /* Django Green for emphasis */
+                --link-color: #58a6ff;
+                --terminal-green: #3fb950;
+                --border-color: #30363d;
+                --code-bg: #161b22;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                font-family:
+                    "JetBrains Mono", "Fira Code", "Courier New", Courier,
+                    monospace;
+                line-height: 1.6;
+                font-size: 16px;
+                padding: 2rem;
+                max-width: 1000px; /* Slightly wider for project cards */
+                margin: 0 auto;
+                overflow-x: hidden;
+            }
+
+            /* Terminal Window */
+            .terminal-window {
+                background: var(--code-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            }
+
+            .terminal-header {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 1rem;
+            }
+
+            .btn-circle {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            .btn-red {
+                background-color: #ff5f56;
+            }
+            .btn-yellow {
+                background-color: #ffbd2e;
+            }
+            .btn-green {
+                background-color: #27c93f;
+            }
+
+            /* Typography */
+            h2 {
+                margin-top: 2.5rem;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                font-size: 1.2rem;
+            }
+
+            h2::before {
+                content: "$ ";
+                color: var(--terminal-green);
+                margin-right: 0.5rem;
+                font-size: 0.9em;
+            }
+
+            a {
+                color: var(--link-color);
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            a:hover {
+                color: var(--accent-color);
+                text-decoration: underline;
+            }
+
+            /* Prompt Lines */
+            .prompt-line {
+                margin-bottom: 1rem;
+            }
+            .prompt {
+                color: var(--terminal-green);
+                font-weight: bold;
+            }
+            .command {
+                color: var(--text-color);
+                margin-left: 0.5rem;
+            }
+            .output {
+                margin-left: 1rem;
+                opacity: 0.9;
+            }
+
+            /* Neofetch Layout */
+            .fetch-container {
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+                margin-top: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .fetch-art {
+                color: var(--accent-color);
+                font-size: 0.9rem;
+                line-height: 1.2;
+                white-space: pre;
+                flex-shrink: 0;
+                display: none;
+            }
+
+            .fetch-info {
+                flex-grow: 1;
+            }
+            .info-row {
+                margin-bottom: 0.3rem;
+            }
+            .label {
+                color: var(--accent-color);
+                font-weight: bold;
+            }
+            .label-green {
+                color: var(--django-green);
+                font-weight: bold;
+            }
+
+            /* Project Grid */
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.2rem;
+                margin-top: 1rem;
+            }
+
+            .project-card {
+                background: var(--code-bg);
+                border: 1px solid var(--border-color);
+                padding: 1.2rem;
+                border-radius: 6px;
+                transition:
+                    transform 0.2s ease,
+                    border-color 0.2s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .project-card:hover {
+                border-color: var(--accent-color);
+                transform: translateY(-3px);
+            }
+
+            .project-card.django-card:hover {
+                border-color: var(--django-green);
+            }
+
+            .project-title {
+                color: var(--text-color);
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .project-year {
+                font-size: 0.8em;
+                color: #666;
+            }
+
+            .tag {
+                display: inline-block;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 0.7rem;
+                margin-right: 5px;
+                margin-top: 0.5rem;
+                font-weight: bold;
+            }
+            .tag-rust {
+                background: #ff6b3522;
+                color: #ff6b35;
+            }
+            .tag-django {
+                background: #44b78b22;
+                color: #44b78b;
+            }
+            .tag-c {
+                background: #5555ff22;
+                color: #a5a5ff;
+            }
+            .tag-js {
+                background: #f7df1e22;
+                color: #f7df1e;
+            }
+
+            /* Lists */
+            ul {
+                list-style: none;
+                margin-left: 1rem;
+            }
+            ul li::before {
+                content: ">> ";
+                color: var(--terminal-green);
+                font-size: 0.8em;
+            }
+
+            footer {
+                margin-top: 4rem;
+                text-align: center;
+                opacity: 0.6;
+                font-size: 0.9rem;
+                border-top: 1px solid var(--border-color);
+                padding-top: 1rem;
+            }
+
+            /* Mobile */
+            @media (min-width: 600px) {
+                .fetch-art {
+                    display: block;
+                }
+            }
+        </style>
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- Main Container -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="btn-circle btn-red"></div>
+                <div class="btn-circle btn-yellow"></div>
+                <div class="btn-circle btn-green"></div>
+                <span style="margin-left: auto; color: #888; font-size: 0.8rem"
+                    >manish@arch:~/portfolio</span
+                >
+            </div>
+
+            <!-- Intro -->
+            <div class="prompt-line">
+                <span class="prompt">visitor</span>:<span style="color: #6e7681"
+                    >~</span
+                >$ <span class="command">cat intro.md</span>
+            </div>
+            <div class="output" id="typed-output"></div>
+
+            <!-- System Info / Skills -->
+            <div class="prompt-line" style="margin-top: 2rem">
+                <span class="prompt">visitor</span>:<span style="color: #6e7681"
+                    >~</span
+                >$ <span class="command">neofetch</span>
+            </div>
+
+            <div class="fetch-container">
+                <div class="fetch-art">
+                    __ ___ / /__________ ___ / _ \/ __/ __/ _ \/ _ \ /
+                    .__/\__/_/ \___/_//_/ /_/
+                </div>
+
+                <div class="fetch-info">
+                    <div class="info-row">
+                        <span class="label">Name:</span> Manish Acharya
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Location:</span> Pokhara, Nepal
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Education:</span> BE Software
+                        Engineering (4th Sem)
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Focus:</span> Low-level Systems,
+                        Rust, OS Dev
+                    </div>
+                    <div class="info-row">
+                        <span class="label-green">Full Stack:</span> Django,
+                        React, REST APIs
+                    </div>
+                    <div class="info-row">
+                        <span class="label">OS:</span> Arch Linux (Zsh)
+                    </div>
+                    <div class="info-row">
+                        <span class="label">GitHub:</span>
+                        <a href="https://github.com/manish-ach" target="_blank"
+                            >manish-ach</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Systems & Rust Projects -->
+        <h2>systems_projects</h2>
+        <div class="prompt-line">
+            <span class="prompt">visitor</span>:<span style="color: #6e7681"
+                >~</span
+            >$ <span class="command">ls -la ./systems/</span>
+        </div>
+
+        <div class="projects-grid">
+            <!-- BROWS Project -->
+            <div class="project-card">
+                <div class="project-title">
+                    BROWS <span class="project-year">2025</span>
+                </div>
+                <p>
+                    Terminal-based browser built entirely in Rust. Focuses on
+                    TUI (Text User Interface) navigation and rendering.
+                </p>
+                <div>
+                    <span class="tag tag-rust">RUST</span>
+                    <span class="tag">TUI</span>
+                </div>
+            </div>
+
+            <!-- M-OSH Project -->
+            <div class="project-card">
+                <div class="project-title">
+                    M-OSH <span class="project-year">2025</span>
+                </div>
+                <p>
+                    Custom shell implementation. Exploring process forking, job
+                    control, and system calls.
+                </p>
+                <div>
+                    <span class="tag tag-rust">RUST</span>
+                    <span class="tag">OS</span>
+                </div>
+            </div>
+
+            <!-- SBOM Attestor -->
+            <div class="project-card">
+                <div class="project-title">
+                    SBOM-Attestor <span class="project-year">2024</span>
+                </div>
+                <p>
+                    Software Supply Chain Security tool. Generates and verifies
+                    Software Bill of Materials (SBOM) for secure deployments.
+                </p>
+                <div>
+                    <span class="tag tag-rust">RUST</span>
+                    <span class="tag">SECURITY</span>
+                </div>
+            </div>
+
+            <!-- Gip Package Manager -->
+            <div class="project-card">
+                <div class="project-title">
+                    gip <span class="project-year">2024</span>
+                </div>
+                <p>
+                    Personal package manager written in Rust. Handles
+                    installation scripts and versioning.
+                </p>
+                <div>
+                    <span class="tag tag-rust">RUST</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Stack / Django Projects -->
+        <h2>full_stack_web</h2>
+        <div class="prompt-line">
+            <span class="prompt">visitor</span>:<span style="color: #6e7681"
+                >~</span
+            >$ <span class="command">ls -la ./web_dev/</span>
+        </div>
+
+        <div class="projects-grid">
+            <!-- RenderNepal -->
+            <div class="project-card django-card">
+                <div class="project-title">
+                    renderNepal <span class="project-year">2024</span>
+                </div>
+                <p>
+                    Interactive map of Nepal. Full-stack application visualizing
+                    geographical data with dynamic frontend interactions.
+                </p>
+                <div>
+                    <span class="tag tag-js">JAVASCRIPT</span>
+                    <span class="tag tag-django">DJANGO</span>
+                </div>
+            </div>
+
+            <!-- Django Placeholder Project (Based on prompt request) -->
+            <div class="project-card django-card">
+                <div class="project-title">
+                    Enterprise Backend <span class="project-year">Current</span>
+                </div>
+                <p>
+                    Django-based backend architecture featuring REST API design,
+                    PostgreSQL integration, and Dockerized deployment.
+                </p>
+                <div>
+                    <span class="tag tag-django">DJANGO</span>
+                    <span class="tag">REST</span>
+                    <span class="tag">DOCKER</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience & Achievements -->
+        <h2>experience.log</h2>
+        <div class="prompt-line">
+            <span class="prompt">visitor</span>:<span style="color: #6e7681"
+                >~</span
+            >$ <span class="command">grep "Winner" achievements.txt</span>
+        </div>
+        <ul>
+            <li>
+                <strong>Team Leader (Team Modulens):</strong> Innnosphere 1.0.
+                Integrated Rust-PHP legacy systems, achieving 85% performance
+                boost.
+            </li>
+            <li>
+                <strong>Codefest Nepal:</strong> Regional Champion (Team
+                Member).
+            </li>
+            <li><strong>Deerhack:</strong> Project Award Winner.</li>
+        </ul>
+
+        <!-- Education -->
+        <h2>education</h2>
+        <ul>
+            <li>
+                Bachelor of Software Engineering — Pokhara University (4th
+                Semester)
+            </li>
+            <li>Higher Secondary — SOS Hermann Gmeiner School Pokhara</li>
+        </ul>
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                Built with Rust love & Arch Linux.<br />
+                &copy; <span id="year"></span> Manish Acharya.
+            </p>
+        </footer>
+
+        <script>
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            // Typing Effect
+            const textToType = `Initiating connection...
+STATUS: CONNECTED.
+
+I am a Software Engineer bridging the gap between low-level systems and high-level web applications. My core expertise lies in Rust, Kernel Development, and Performance Optimization, with growing proficiency in Full Stack development using Django and JavaScript.`;
+
+            const outputElement = document.getElementById("typed-output");
+            let typeIndex = 0;
+
+            function typeWriter() {
+                if (typeIndex < textToType.length) {
+                    outputElement.innerHTML += textToType.charAt(typeIndex);
+                    typeIndex++;
+                    setTimeout(typeWriter, 25);
+                }
+            }
+            setTimeout(typeWriter, 500);
+        </script>
+    </body>
+</html>
