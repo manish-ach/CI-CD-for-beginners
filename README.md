@@ -131,6 +131,15 @@ EXPOSE 80              # Document the port
 
 ---
 
+## Screenshots
+- github actions running
+<img width="1461" height="725" alt="Screenshot 2026-02-13 at 19 46 32" src="https://github.com/user-attachments/assets/01ef7bb6-578a-4d3c-9302-430fafac57bb" />
+
+         
+- automated deploy to dockerhub ([check it out](https://hub.docker.com/repository/docker/manuach/my-static-site/general))
+<img width="692" height="628" alt="Screenshot 2026-02-13 at 19 56 07" src="https://github.com/user-attachments/assets/f84f9530-3191-444a-929a-92c171f330a9" />
+
+
 ## 📚 Next Steps
 
 - [ ] Add HTML validation tests
