@@ -47,7 +47,7 @@ jobs:
                   username: ${{ secrets.DOCKER_USERNAME }}
                   password: ${{ secrets.DOCKER_TOKEN }}
 
-            - name: Buidl and push to Docker hub
+            - name: Build and push to Docker hub
               uses: docker/build-push-action@v5
               with:
                   context: .
