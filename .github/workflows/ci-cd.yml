@@ -23,7 +23,7 @@ jobs:
             # Step3: Test - Run container and check if it responds
             - name: Test container
               run: |
-                  docker run -d -p 8080:80 --name test-container my-static-site:${{ gihub.sha }}
+                  docker run -d -p 8080:80 --name test-container my-static-site:${{ github.sha }}
                   sleep 5
                   curl --fail http://localhost:8080 || exit 1
                   docker stop test-container
